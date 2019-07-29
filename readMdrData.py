@@ -12,6 +12,8 @@ class mdrOutput:
         fileLen = int(hf.fileLength(self.nameOfFile))
         self.arrayDischNum = np.zeros(fileLen, dtype=int)
         self.arrayDiagFreq = np.zeros(fileLen)
+        self.arrayFreqShift = np.zeros(fileLen)
+        self.arrayKapaSpec = np.zeros(fileLen)
         self.arrayRho = np.zeros(fileLen)
         self.arrayUncerRho = np.zeros(fileLen)
         self.arrayKapaPerp = np.zeros(fileLen)
@@ -26,6 +28,8 @@ class mdrOutput:
                 correctFields = [i for i in fields]
                 self.arrayDischNum[idx] = int(correctFields[0])
                 self.arrayDiagFreq[idx] = float(correctFields[1])
+                self.arrayFreqShift[idx] = float(correctFields[4]) 
+                self.arrayKapaSpec[idx] = float(correctFields[5])
                 self.arrayRho[idx] = float(correctFields[10])
                 self.arrayUncerRho[idx] = float(correctFields[11])
                 self.arrayKapaPerp[idx] = float(correctFields[12])
@@ -40,7 +44,15 @@ class mdrOutput:
     def giveDiagFreq(self, whichDisch=0):
         idx = np.where(self.arrayDischNum==whichDisch)
         return self.arrayDiagFreq[idx] if whichDisch!=0 else self.arrayDiagFreq
+
+    def giveFreqShift(self, whichDisch=0):
+        idx = np.where(self.arrayDischNum==whichDisch)
+        return self.arrayFreqShift[idx] if whichDisch!=0 else self.arrayFreqShift
     
+    def giveMaxKapaSpectrum(self, whichDisch=0):
+        idx = np.where(self.arrayDischNum==whichDisch)
+        return self.arrayKapaSpec[idx] if whichDisch!=0 else self.arrayKapaSpec
+
     def giveRho(self, whichDisch=0):
         idx = np.where(self.arrayDischNum==whichDisch)
         return self.arrayRho[idx] if whichDisch!=0 else self.arrayRho
