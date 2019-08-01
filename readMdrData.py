@@ -38,6 +38,9 @@ class mdrOutput:
                 idx = idx + 1
         myFile.closed
 
+        self.arrayVelocityPerp = 2. * np.pi * self.arrayFreqShift / self.arrayKapaPerp
+        self.arrayElectricField = self.arrayVelocityPerp * self.arrayMagField
+
     def dischInFile(self):
         return np.unique(self.arrayDischNum)
 
@@ -72,3 +75,11 @@ class mdrOutput:
     def giveMagField(self, whichDisch=0):
         idx = np.where(self.arrayDischNum==whichDisch)
         return self.arrayMagField[idx] if whichDisch!=0 else self.arrayMagField
+
+    def giveVelocityPerp(self, whichDisch=0):
+        idx = np.where(self.arrayDischNum==whichDisch)
+        return self.arrayVelocityPerp[idx] if whichDisch!=0 else self.arrayVelocityPerp
+
+    def giveElectricField(self, whichDisch=0):
+        idx = np.where(self.arrayDischNum==whichDisch)
+        return self.arrayElectricField[idx] if whichDisch!=0 else self.arrayElectricField

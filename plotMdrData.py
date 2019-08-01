@@ -76,3 +76,35 @@ class graphsMdrData:
         plt.show()
 
         return
+
+    def profVelocity(self, whichDisch=[]):
+        dischNum = list(self.myData.dischInFile()) if whichDisch == [] else whichDisch
+        plt.figure(5)
+        for idxDischarge in dischNum:
+            r = self.myData.giveRho(idxDischarge)
+            uP = self.myData.giveVelocityPerp(idxDischarge)
+            plt.plot(r, uP, 'o', label=str(idxDischarge))
+
+        plt.grid(True)
+        plt.legend(loc='best')
+        plt.xlabel(r'$\rho$')
+        plt.ylabel(r'$u_{}$'.format('\\perp'))
+        plt.show()
+
+        return
+
+    def profElectricField(self, whichDisch=[]):
+        dischNum = list(self.myData.dischInFile()) if whichDisch == [] else whichDisch
+        plt.figure(6)
+        for idxDischarge in dischNum:
+            r = self.myData.giveRho(idxDischarge)
+            E = self.myData.giveElectricField(idxDischarge)
+            plt.plot(r, E, 'o', label=str(idxDischarge))
+
+        plt.grid(True)
+        plt.legend(loc='best')
+        plt.xlabel(r'$\rho$')
+        plt.ylabel(r'$E$')
+        plt.show()
+
+        return
